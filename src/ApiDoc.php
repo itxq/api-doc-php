@@ -22,11 +22,62 @@ use itxq\apidoc\lib\ParseComment;
 class ApiDoc
 {
     /**
+     * @var array - 结构化的数组
+     */
+    private $ApiTree = [];
+    
+    /**
+     * @var array - 要生成API的Class类名
+     */
+    private $class = [];
+    
+    /**
+     * @var array - 忽略生成的类方法名
+     */
+    private $filterMethod = ['__construct'];
+    
+    /**
+     * ApiDoc 构造函数.
+     * @param array $config - 配置信息
+     */
+    public function __construct($config) {
+        // 需要解析的类
+        if (isset($config['class'])) {
+            $this->class = array_merge($this->class, $config['class']);
+        }
+        // 忽略生成的类方法
+        if (isset($config['filter_method'])) {
+            $this->filterMethod = array_merge($this->filterMethod, $config['filter_method']);
+        }
+    }
+    
+    /**
+     * 获取API文档数据
+     * @param int $type - 方法过滤，默认只获取 public类型 方法
+     * ReflectionMethod::IS_STATIC
+     * ReflectionMethod::IS_PUBLIC
+     * ReflectionMethod::IS_PROTECTED
+     * ReflectionMethod::IS_PRIVATE
+     * ReflectionMethod::IS_ABSTRACT
+     * ReflectionMethod::IS_FINAL
+     * @return array
+     */
+    public function getApiDoc($type = \ReflectionMethod::IS_PUBLIC) {
+        foreach ($this->class as $classItem) {
+            $this->ApiTree[$classItem] = [
+                'class'  => $this->_getClassComment($classItem),
+                'action' => $this->_getActionComment($classItem, $type)
+            ];
+        }
+        return $this->ApiTree;
+    }
+    
+    /**
      * 获取类的注释
      * @param $class - 类名称(存在命名空间时要完整写入) eg: $class = 'itxq\\apidoc\\ApiDoc';
      * @return array - 返回格式为数组（未获取到注释时返回空数组）
      */
-    public function getDocComment($class) {
+    private function _getClassComment($class) {
         try {
             $reflection = new \ReflectionClass($class);
             $classDocComment = $reflection->getDocComment();
@@ -40,7 +91,7 @@ class ApiDoc
     /**
      * 获取指定类下方法的注释
      * @param $class - 类名称(存在命名空间时要完整写入) eg: $class = 'itxq\\apidoc\\ApiDoc';
-     * @param $type - 方法过滤，默认只获取 public类型 方法
+     * @param int $type - 方法过滤，默认只获取 public类型 方法
      * ReflectionMethod::IS_STATIC
      * ReflectionMethod::IS_PUBLIC
      * ReflectionMethod::IS_PROTECTED
@@ -49,7 +100,7 @@ class ApiDoc
      * ReflectionMethod::IS_FINAL
      * @return array - 返回格式为数组（未获取到注释时返回空数组）
      */
-    public function getActionComment($class, $type = \ReflectionMethod::IS_PUBLIC) {
+    private function _getActionComment($class, $type = \ReflectionMethod::IS_PUBLIC) {
         try {
             $reflection = new \ReflectionClass($class);
             //只允许生成public方法
