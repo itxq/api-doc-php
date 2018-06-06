@@ -9,7 +9,6 @@
             "email": "360237521@qq.com"
         }
     ],
-    "version"    : "1.0.*",
     "require"    : {
         "php": ">=5.6.0"
     },
