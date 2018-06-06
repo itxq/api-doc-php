@@ -41,3 +41,4 @@ echo '<pre>';
 var_dump($doc);
 echo '</pre>';
 ```
++ 具体使用可参见test目录
