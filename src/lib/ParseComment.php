@@ -22,7 +22,7 @@ class ParseComment
     /**
      * @var array - 注释解析后的数组
      */
-    protected $commentParams = [];
+    private $commentParams = [];
     
     /**
      * 将注释按行解析并以数组格式返回
@@ -56,7 +56,7 @@ class ParseComment
             }
             $_type = $_parse['type'];
             $_content = isset($_parse['content']) ? $_parse['content'] : '';
-            if ($_type === 'param') {
+            if (in_array($_type, ['param', 'code', 'return'])) {
                 if (!isset($this->commentParams[$_type])) {
                     $this->commentParams[$_type] = [];
                 }
@@ -78,7 +78,7 @@ class ParseComment
         $line = explode(' ', $line);
         $line[0] = substr($line[0], 1);
         $class = new ParseLine();
-        $action = 'parseLine' . $class->underlineToHump($line[0]);
+        $action = 'parseLine' . Tools::underlineToHump($line[0]);
         if (!method_exists($class, $action)) {
             $action = 'parseLineTitle';
         }
