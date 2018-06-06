@@ -64,10 +64,11 @@ class ApiDoc
      */
     public function getApiDoc($type = \ReflectionMethod::IS_PUBLIC) {
         foreach ($this->class as $classItem) {
-            $this->ApiTree[$classItem] = [
-                'class'  => $this->_getClassComment($classItem),
-                'action' => $this->_getActionComment($classItem, $type)
-            ];
+            $actionInfo = $this->_getActionComment($classItem, $type);
+            if (count($actionInfo) >= 1) {
+                $this->ApiTree[$classItem] = $this->_getClassComment($classItem);
+                $this->ApiTree[$classItem]['action'] = $actionInfo;
+            }
         }
         return $this->ApiTree;
     }
@@ -112,7 +113,10 @@ class ApiDoc
         $parse = new ParseComment();
         foreach ($method as $action) {
             try {
-                $comments[] = $parse->parseCommentToArray($action->getDocComment());
+                $actionComments = $parse->parseCommentToArray($action->getDocComment());
+                if (count($actionComments) >= 1 && !in_array($action->name, $this->filterMethod)) {
+                    $comments[$action->name] = $actionComments;
+                }
             } catch (\Exception $exception) {
                 continue;
             }
