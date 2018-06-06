@@ -1,6 +1,6 @@
 {
     "name"       : "itxq/api-doc-php",
-    "description": "wechat-sdk-php",
+    "description": "api-doc-php",
     "type"       : "library",
     "license"    : "Apache-2.0",
     "authors"    : [
