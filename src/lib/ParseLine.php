@@ -39,7 +39,8 @@ class ParseLine
             'param_type'    => $line[1],
             'param_name'    => $line[2],
             'param_title'   => $line[3],
-            'param_default' => isset($line[4]) ? $line[4] : '',
+            'param_default' => $line[4],
+            'param_require' => $line[5],
         ];
     }
     
@@ -63,9 +64,10 @@ class ParseLine
      */
     public function parseLineReturn($line) {
         return [
-            'type'        => $line[0],
-            'return_type' => $line[1],
-            'content'     => isset($line[2]) ? $line[2] : '',
+            'type'         => $line[0],
+            'return_type'  => $line[1],
+            'return_name'  => $line[2],
+            'return_title' => isset($line[3]) ? $line[3] : '',
         ];
     }
 }
