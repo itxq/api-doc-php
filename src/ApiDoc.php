@@ -110,9 +110,9 @@ class ApiDoc
             return [];
         }
         $comments = [];
-        $parse = new ParseComment();
         foreach ($method as $action) {
             try {
+                $parse = new ParseComment();
                 $actionComments = $parse->parseCommentToArray($action->getDocComment());
                 if (count($actionComments) >= 1 && !in_array($action->name, $this->filterMethod)) {
                     $comments[$action->name] = $actionComments;
