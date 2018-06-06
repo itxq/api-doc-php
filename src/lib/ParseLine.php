@@ -29,46 +29,43 @@ class ParseLine
     }
     
     /**
-     * 解析param
+     * 解析 param
      * @param $line
      * @return array
      */
     public function parseLineParam($line) {
         return [
-            'type'          => 'param',
+            'type'          => $line[0],
             'param_type'    => $line[1],
             'param_name'    => $line[2],
             'param_title'   => $line[3],
-            'param_default' => isset($line[4]) ? $line[4] : '无',
+            'param_default' => isset($line[4]) ? $line[4] : '',
         ];
     }
     
     /**
-     * 下划线命名转驼峰命名
-     * @param $str - 下划线命名字符串
-     * @param $is_first - 是否为大驼峰（即首字母也大写）
-     * @return mixed
+     * 解析 code
+     * @param $line
+     * @return array
      */
-    public function underlineToHump($str, $is_first = false) {
-        $str = preg_replace_callback('/([\-\_]+([a-z]{1}))/i', function ($matches) {
-            return strtoupper($matches[2]);
-        }, $str);
-        if ($is_first) {
-            $str = ucfirst($str);
-        }
-        return $str;
+    public function parseLineCode($line) {
+        return [
+            'type'    => $line[0],
+            'code'    => $line[1],
+            'content' => isset($line[2]) ? $line[2] : '',
+        ];
     }
     
     /**
-     * 驼峰命名转下划线命名
-     * @param $str
-     * @return mixed
+     * 解析 return
+     * @param $line
+     * @return array
      */
-    public function humpToUnderline($str) {
-        $str = preg_replace_callback('/([A-Z]{1})/', function ($matches) {
-            return '_' . strtolower($matches[0]);
-        }, $str);
-        $str = preg_replace('/^\_/', '', $str);
-        return $str;
+    public function parseLineReturn($line) {
+        return [
+            'type'        => $line[0],
+            'return_type' => $line[1],
+            'content'     => isset($line[2]) ? $line[2] : '',
+        ];
     }
 }
