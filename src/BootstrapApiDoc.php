@@ -52,6 +52,7 @@ class BootstrapApiDoc extends ApiDoc
         .action-item .action-title {text-indent: 0.6em;border-left: 3px solid #F0AD4E;font-size: 20px;margin: 8px 0;}
         .table-item {background-color:#FFFFFF;padding-top: 10px;margin-bottom:10px;border: solid 1px #ccc;border-radius: 5px;}
         .list-group-item-sub{padding: .5rem 1.25rem;}
+        .copyright-content{margin: 10px 0;}
     </style>';
     
     /**
@@ -135,8 +136,8 @@ class BootstrapApiDoc extends ApiDoc
                     <div class="col-lg-12">{$this->_getDocList($data)}</div>
                 </div>
              <div class="row">
-                    <div class="col-lg-12 text-center">
-                        版权的撒打算
+                    <div class="col-lg-12 text-center copyright-content">
+                        Copyright  2016 - 2018 <a href="http://www.xqitw.cn">小强IT屋</a> 版权所有
                     </div>
                 </div>
         </div>
