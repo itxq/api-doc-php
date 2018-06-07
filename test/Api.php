@@ -11,28 +11,39 @@
  */
 
 /**
- * @title 测试用的API类
+ * @title 登录注册
  * Class Api
  */
 class Api
 {
     /**
-     * @title 添加操作
-     * @url https://wwww.baidu.com
+     * @title 用户登录API
+     * @url https://wwww.baidu.com/login
      * @method POST
-     * @param array|string|bool id 用户ID null 必须
-     * @param array|string|bool id2 用户ID2 false 非必须
+     * @param string username 账号 空 必须
+     * @param string password 密码 空 必须
      * @code 1 成功
      * @code 2 失败
      * @return int code 状态码（具体参见状态码说明）
      * @return string msg 提示信息
-     * @return object data 返回的数据
      */
-    public function add() {
-    
+    public function login() {
+        return json_encode(['code' => 1, 'msg' => '登录成功']);
     }
     
-    public function edit() {
-    
+    /**
+     * @title 用户注册API
+     * @url https://wwww.baidu.com/reg
+     * @method POST
+     * @param string username 账号 空 必须
+     * @param string password 密码 空 必须
+     * @param string password2 重复密码 空 必须
+     * @code 1 成功
+     * @code 2 失败
+     * @return int code 状态码（具体参见状态码说明）
+     * @return string msg 提示信息
+     */
+    public function reg() {
+        return json_encode(['code' => 1, 'msg' => '注册成功']);
     }
 }
