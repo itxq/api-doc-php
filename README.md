@@ -40,10 +40,8 @@ $config = [
     'class'         => ['Api', 'Api2'], // 要生成文档的类
     'filter_method' => ['__construct'], // 要过滤的方法名称
 ];
-$api = new \itxq\apidoc\ApiDoc($config);
-$doc = $api->getApiDoc();
-echo '<pre>';
-var_dump($doc);
-echo '</pre>';
+$api = new \itxq\apidoc\BootstrapApiDoc($config);
+$doc = $api->getHtml();
+exit($doc);
 ```
 ### 具体效果可运行test目录下的`index.php`查看
