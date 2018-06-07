@@ -1,17 +1,19 @@
 # Api-Doc-PHP
 
+### 主要功能：
+
++ 根据接口注释自动生成接口文档
+
+### 演示地址
+
+[【Gitee Pages:】http://itxq.gitee.io/api-doc-php](http://itxq.gitee.io/api-doc-php)
+
 ### 开源地址：
 
 [【GigHub:】https://github.com/itxq/api-doc-php](https://github.com/itxq/api-doc-php)
 
 [【码云:】https://gitee.com/itxq/api-doc-php](https://github.com/itxq/api-doc-php)
     
-    
-
-### 主要功能：
-
-+ 根据接口注释自动生成接口文档
-
 ### 扩展安装：
 
 + 方法一：composer命令 `composer require itxq/wechat-sdk-php`
