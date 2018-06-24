@@ -16,7 +16,7 @@
     
 ### 扩展安装：
 
-+ 方法一：composer命令 `composer require itxq/wechat-sdk-php`
++ 方法一：composer命令 `composer require itxq/api-doc-php`
 
 + 方法二：直接下载压缩包，然后进入项目中执行 composer命令 `composer update` 来生成自动加载文件
 
