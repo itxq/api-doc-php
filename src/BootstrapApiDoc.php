@@ -306,7 +306,9 @@ EXT;
             }
             $html .= '</div></li>';
         }
-        $html .= ' <li class="nav-item"><a class="nav-link" href="?download=api_doc_php">下载文档</a></li>';
+        if (!isset($_GET['download']) || $_GET['download'] !== 'api_doc_php') {
+            $html .= ' <li class="nav-item"><a class="nav-link" href="?download=api_doc_php">下载文档</a></li>';
+        }
         $html .= '</ul>';
         return $html;
     }
